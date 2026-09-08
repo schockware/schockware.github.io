@@ -18,7 +18,20 @@ export function RouteFocusHandler({ children }: RouteFocusHandlerProps) {
   }, [location.pathname]);
 
   return (
-    <main ref={mainRef} tabIndex={-1}>
+    <main
+      ref={mainRef}
+      tabIndex={-1}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        flex: 1,
+        width: "100%",
+        maxWidth: "1152px",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
       {children}
     </main>
   );

@@ -1,9 +1,14 @@
 import { skillSynonyms } from "../data/resume/skillSynonyms";
 import type { Position, StructuredHighlight, Tier, TierNarrative } from "../types/resume";
 
+// Every lookup in canonicalizeSkill lowercases its input first, so the
+// canonical form must be registered under its lowercased spelling too --
+// otherwise a keyword that literally matches the canonical string (e.g.
+// "SQL Server" in positions.ts) resolves to a different canonical value
+// than an alias like "mssql" does, and the two never match each other.
 const canonicalByAlias = new Map<string, string>();
 for (const [canonical, aliases] of Object.entries(skillSynonyms)) {
-  canonicalByAlias.set(canonical, canonical);
+  canonicalByAlias.set(canonical.toLowerCase(), canonical);
   for (const alias of aliases) {
     canonicalByAlias.set(alias.toLowerCase(), canonical);
   }
@@ -62,34 +67,66 @@ export function searchAllPositions(positions: Position[], rawQuery: string): Ski
   return matches;
 }
 
-export interface TierSkillMatch extends SkillMatch {
-  emphasis: "lead" | "support";
-  narrative: Required<TierNarrative>;
+export interface PositionTierMatch {
+  position: Position;
+  // "brief" positions render as a single Earlier-Experience line with no
+  // highlight cards, so `highlights` is always empty for them -- kept on
+  // the match (rather than filtered out) so a brief position still shows
+  // up on the resume at all, just compressed. See Position.resumeDetail.
+  detail: "full" | "brief";
+  highlights: Array<{
+    highlight: StructuredHighlight;
+    emphasis: "lead" | "support";
+    narrative: Required<TierNarrative>;
+  }>;
 }
 
-/** Highlights for one tier, filtered further by a skill query -- used inline on /resume/:tier. */
-export function filterTierHighlights(
+/**
+ * Same filtering as filterTierHighlights, grouped back under one card per
+ * Position (in positions.ts's chronological order) instead of one card per
+ * highlight -- so title/employer/dates render once per role, not once per
+ * highlight. Lead-before-support ordering is scoped within each position's
+ * own highlights rather than flattened across the whole tier, so a
+ * support-tier highlight at someone's current role doesn't get displaced
+ * behind a lead-tier highlight from an older one.
+ *
+ * Positions marked `resumeDetail: "brief"` skip highlight filtering
+ * entirely and always surface (unless a skill query is active, in which
+ * case they're skipped -- a skill search should only surface positions
+ * that actually demonstrate the queried skill, not every older role by
+ * default) so the resume stays printable instead of showing full STAR
+ * detail for a 15+ year career.
+ */
+export function groupTierHighlightsByPosition(
   positions: Position[],
   tier: Tier,
   rawQuery: string,
-): TierSkillMatch[] {
+): PositionTierMatch[] {
   const canonicalTerms = parseSkillQuery(rawQuery);
-  const matches: TierSkillMatch[] = [];
+  const groups: PositionTierMatch[] = [];
   for (const position of positions) {
+    const detail = position.resumeDetail ?? "full";
+    if (detail === "brief") {
+      const hasIncludedHighlight = position.highlights.some((h) => h.tiers.find((t) => t.tier === tier && t.include));
+      if (!hasIncludedHighlight) continue;
+      if (canonicalTerms.length > 0) continue;
+      groups.push({ position, detail: "brief", highlights: [] });
+      continue;
+    }
+    const highlights: PositionTierMatch["highlights"] = [];
     for (const highlight of position.highlights) {
       const weight = highlight.tiers.find((t) => t.tier === tier);
       if (!weight?.include) continue;
-      if (highlightMatches(highlight, canonicalTerms)) {
-        matches.push({
-          position,
-          highlight,
-          emphasis: weight.emphasis ?? "support",
-          narrative: resolveNarrative(highlight, tier),
-        });
-      }
+      if (!highlightMatches(highlight, canonicalTerms)) continue;
+      highlights.push({
+        highlight,
+        emphasis: weight.emphasis ?? "support",
+        narrative: resolveNarrative(highlight, tier),
+      });
     }
+    if (highlights.length === 0) continue;
+    highlights.sort((a, b) => (a.emphasis === b.emphasis ? 0 : a.emphasis === "lead" ? -1 : 1));
+    groups.push({ position, detail: "full", highlights });
   }
-  // lead-emphasis highlights surface before support, per
-  // design/ARCHITECTURE.md's tier-weighting model.
-  return matches.sort((a, b) => (a.emphasis === b.emphasis ? 0 : a.emphasis === "lead" ? -1 : 1));
+  return groups;
 }

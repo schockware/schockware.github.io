@@ -16,7 +16,7 @@ export function SkillsPage() {
   const matches = useMemo(() => searchAllPositions(positions, skillQuery), [skillQuery]);
 
   return (
-    <Stack spacing={3} sx={{ p: 4, maxWidth: "70ch" }}>
+    <Stack spacing={3} sx={{ p: 4, width: "100%" }}>
       <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
         Search by skill
       </Typography>

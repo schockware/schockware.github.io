@@ -12,17 +12,21 @@
 // Call createAppTheme() after tokens.css has been applied to the DOM
 // (i.e. from an app entry point after import "./tokens.css", not at
 // this module's top level) so getComputedStyle sees real values.
+//
+// isDark is passed in rather than re-detected here, because the caller
+// (src/App.tsx, via src/lib/colorScheme.ts) resolves it from either the
+// user's explicit toggle choice or the system preference -- this stays
+// a pure function of that single resolved value so re-creating the
+// theme on toggle re-reads the [data-theme]-overridden CSS vars.
 import { createTheme } from "@mui/material/styles";
 
 const cssVar = (name: string) =>
   getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-export function createAppTheme() {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
+export function createAppTheme(isDark: boolean) {
   return createTheme({
     palette: {
-      mode: prefersDark ? "dark" : "light",
+      mode: isDark ? "dark" : "light",
       primary: { main: cssVar("--color-primary") },
       secondary: { main: cssVar("--color-secondary") },
       success: { main: cssVar("--color-success") },

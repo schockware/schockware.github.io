@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Steven Chock &mdash; Resume</title>
+    <script>
+      // Stamp the persisted color-scheme choice before first paint so
+      // there's no flash of the wrong theme -- see src/lib/colorScheme.ts,
+      // which owns this same logic for use after React mounts.
+      (function () {
+        try {
+          var stored = localStorage.getItem("color-scheme-preference");
+          if (stored === "light" || stored === "dark") {
+            document.documentElement.setAttribute("data-theme", stored);
+          }
+        } catch (e) {
+          // localStorage unavailable -- system preference (tokens.css media query) applies.
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -5,6 +5,30 @@ import type { Position } from "../../types/resume";
 // See design/ARCHITECTURE.md ("Open Items Not Yet Decided").
 export const positions: Position[] = [
   {
+    id: "independent-projects-health-break",
+    employer: "Independent / Open Source",
+    title: "Health Recovery Break & Independent Projects",
+    start: "2026-04",
+    end: "present",
+    highlights: [
+      {
+        id: "independent-mssql-tooling-generalization",
+        context:
+          "A deliberate, purposeful break for health recovery following a sustained pattern of overcommitment across mission-driven roles, used for family time, creative writing, and self-directed technical growth.",
+        action:
+          "Generalized and open-sourced the SQL Server query-plan diagnostic methodology built at Red Rover K12 into standalone public tooling (mssql-query-plan-analyzer, mssql-performance-kit), continuing to develop and refine it independently of any employer.",
+        result:
+          "Produced concrete, ongoing evidence that the Red Rover diagnostic tooling reflects a genuine, sustained technical interest rather than a one-off employer-specific project.",
+        keywords: ["SQL Server", "Open source", "Developer tooling", "Query plan analysis"],
+        tiers: [
+          { tier: "principal", include: true, emphasis: "support" },
+          { tier: "staff", include: true, emphasis: "support" },
+          { tier: "senior", include: false },
+        ],
+      },
+    ],
+  },
+  {
     id: "red-rover-k12",
     employer: "Red Rover K12",
     title: "Senior Software Engineer",
@@ -81,6 +105,31 @@ export const positions: Position[] = [
         ],
         tiers: [
           { tier: "principal", include: true, emphasis: "lead" },
+          { tier: "staff", include: true, emphasis: "lead" },
+          { tier: "senior", include: true, emphasis: "support" },
+        ],
+      },
+      {
+        id: "red-rover-frontend-standards",
+        context:
+          "The company's core product was a React (web) + React Native (mobile) monolith sharing one GraphQL/REST API, but had no enforced frontend engineering standards. As newer products were added, they drifted onto server-side-rendered React, competing UI component libraries, and inconsistent folder structures, with repositories proliferating rather than converging.",
+        action:
+          "Diagnosed the fragmentation as a standards-governance gap rather than a series of unrelated technical choices, and proposed consolidating the web and React Native codebases into a shared monorepo to arrest the drift.",
+        result:
+          "Correctly identified the architectural root cause of a growing frontend consistency problem; the monorepo proposal did not get organizational buy-in, so the underlying fragmentation persisted -- an honest example of a correct diagnosis that leadership didn't act on, distinct from the SQL performance crisis where the fix was eventually adopted.",
+        keywords: ["React", "React Native", "TypeScript", "GraphQL", "Systems architecture", "Technical leadership"],
+        narrative: {
+          principal: {
+            context:
+              "A multi-product React/React Native platform had no enforced frontend engineering standards, and organizational tolerance for architectural inconsistency (explicitly, per leadership, prioritizing shipped value over standards) let server-side-rendered React, competing UI component libraries, and divergent folder structures proliferate across newer products.",
+            action:
+              "Made the case for a monorepo consolidating the web and mobile codebases as a structural fix to the drift, arguing it at the level of engineering standards and long-term maintainability rather than any single product's immediate roadmap.",
+            result:
+              "Correctly diagnosed a systemic frontend-governance gap before it compounded further; the proposal did not get leadership buy-in, illustrating the limits of technical advocacy against an organization's explicit anti-standards culture -- an honest account of a sound call not adopted, not a resolved success.",
+          },
+        },
+        tiers: [
+          { tier: "principal", include: true, emphasis: "support" },
           { tier: "staff", include: true, emphasis: "lead" },
           { tier: "senior", include: true, emphasis: "support" },
         ],
@@ -208,6 +257,31 @@ export const positions: Position[] = [
     ],
   },
   {
+    id: "dps-return-senior-developer",
+    employer: "Denver Public Schools",
+    title: "Senior Software Developer",
+    start: "2021-10",
+    end: "2022-07",
+    resumeDetail: "brief",
+    highlights: [
+      {
+        id: "dps-return-full-lifecycle-delivery",
+        context:
+          "A district that had just eliminated roughly 150 central-administration positions had a thin technical bench relative to its workload, and needed a generalist who could own mid-sized projects end to end on short notice.",
+        action:
+          "Designed and delivered two mid-sized educational-technology projects (Summer Connections and Assistive Technology Part 1) full-stack from ideation through release, while mentoring junior and mid-level developers throughout, and extended several ~8-year-old legacy systems spanning Java, C#, SharePoint, and SSIS rather than treating them as replaceable.",
+        result:
+          "Delivered full-lifecycle ownership on two concrete projects despite significant post-reduction-in-force understaffing, demonstrating a repeatable pattern of rapid legacy-system triage and generalist delivery under pressure.",
+        keywords: ["Vue.js", "C#", "Java", "Microservices", "SQL Server", "Mentorship", "Systems architecture"],
+        tiers: [
+          { tier: "principal", include: false },
+          { tier: "staff", include: true, emphasis: "support" },
+          { tier: "senior", include: true, emphasis: "lead" },
+        ],
+      },
+    ],
+  },
+  {
     id: "dealer360-bcit",
     employer: "Dealer360 (BCIT)",
     title: "Senior Software Developer",
@@ -274,11 +348,37 @@ export const positions: Position[] = [
     ],
   },
   {
+    id: "denver-county-court",
+    employer: "Denver County Court",
+    title: "Associate Software Developer",
+    start: "2017-03",
+    end: "2018-09",
+    resumeDetail: "brief",
+    highlights: [
+      {
+        id: "county-court-efile-queue-fix",
+        context:
+          "An in-progress internal E-File system, built to replace a third-party document-filing vendor, was processing filings synchronously, causing system crashes under load on a legacy PowerBuilder/MSSQL 2000 core roughly a decade behind current practice.",
+        action:
+          "Diagnosed the synchronous processing as the structural cause of the crashes, recommended a queue-based architecture, and built a Windows Service (DocumentQUploader) to implement it alongside finishing and managing the broader E-File system (jQuery, ASP.NET MVC, MSSQL).",
+        result:
+          "Resolved a recurring production-crash pattern by re-architecting the filing pipeline around a queue, while also becoming a de facto mentor to the wider team despite holding the most junior title on it.",
+        keywords: ["ASP.NET", "MSSQL", "Systems architecture", "Queue-based architecture", "Mentorship"],
+        tiers: [
+          { tier: "principal", include: false },
+          { tier: "staff", include: true, emphasis: "support" },
+          { tier: "senior", include: true, emphasis: "lead" },
+        ],
+      },
+    ],
+  },
+  {
     id: "jeffco-lead-developer",
     employer: "Jefferson County Public Schools",
     title: "Lead Developer",
     start: "2016-02",
     end: "2017-03",
+    resumeDetail: "brief",
     highlights: [
       {
         id: "jeffco-strapp-rebuild",
@@ -349,6 +449,7 @@ export const positions: Position[] = [
     title: "Systems Analyst",
     start: "2012-11",
     end: "2016-02",
+    resumeDetail: "brief",
     highlights: [
       {
         id: "jeffco-strapp-first-build",
@@ -425,6 +526,7 @@ export const positions: Position[] = [
     title: "Process Analyst",
     start: "2010-03",
     end: "2012-11",
+    resumeDetail: "brief",
     highlights: [
       {
         id: "dps-eep-rebuild",
@@ -476,6 +578,31 @@ export const positions: Position[] = [
           { tier: "principal", include: false },
           { tier: "staff", include: false },
           { tier: "senior", include: true, emphasis: "lead" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "dps-research-analyst",
+    employer: "Denver Public Schools",
+    title: "Research Analyst",
+    start: "2009-02",
+    end: "2010-03",
+    resumeDetail: "brief",
+    highlights: [
+      {
+        id: "dps-october-count-first-tool",
+        context:
+          "Year-over-year state audits of \"October Count,\" the process determining roughly $500M in annual district state funding, were costing an estimated $1.3M-$5M annually in unsubstantiated students -- with no formal reporting discipline yet in place to measure the problem.",
+        action:
+          "Built the first version of software to search district records for documentation substantiating a given student's audit requirement, turning an ad hoc, manual documentation hunt into a systematic process, while also operating past the report-generation scope of the posted title.",
+        result:
+          "Directly targeted a $1.3M-$5M annual funding-audit exposure with the district's first systematic documentation-search tooling, laying the groundwork for the quantified prevention program built in the following role.",
+        keywords: ["SQL Server", "ASP.NET", "SSRS", "Compliance reporting", "Systems architecture"],
+        tiers: [
+          { tier: "principal", include: false },
+          { tier: "staff", include: false },
+          { tier: "senior", include: true, emphasis: "support" },
         ],
       },
     ],

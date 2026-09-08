@@ -16,8 +16,8 @@
   color-scheme: light dark;
 
   /* Color: brand */
-  --color-primary: #3b5bdb;
-  --color-primary-hover: #2f4bc7;
+  --color-primary: #4b0082;
+  --color-primary-hover: #3a0066;
   --color-secondary: #ae3ec9;
   --color-accent: #12b886;
 
@@ -81,7 +81,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  /* :not([data-theme="light"]) lets an explicit light choice below win
+     over a dark system preference; an explicit dark choice is handled
+     by the [data-theme="dark"] block, which wins in both directions
+     since it isn't gated by a media query. */
+  :root:not([data-theme="light"]) {
     --color-bg: #1a1b1e;
     --color-bg-subtle: #141517;
     --color-surface: #25262b;
@@ -89,4 +93,16 @@
     --color-text: #f4f5f7;
     --color-text-muted: #a6a7ab;
   }
+}
+
+/* Explicit user choice (persisted in localStorage, stamped on <html>
+   by the nav's dark-mode toggle) overrides system preference in both
+   directions -- see src/lib/colorScheme.ts. */
+:root[data-theme="dark"] {
+  --color-bg: #1a1b1e;
+  --color-bg-subtle: #141517;
+  --color-surface: #25262b;
+  --color-border: #373a40;
+  --color-text: #f4f5f7;
+  --color-text-muted: #a6a7ab;
 }

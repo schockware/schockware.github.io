@@ -1,4 +1,56 @@
-// Canonical skill key -> alternate forms a searcher might type.
-// Populate once real keywords exist in positions.ts.
-// See design/ARCHITECTURE.md ("Synonym-aware skill search").
-export const skillSynonyms: Record<string, string[]> = {};
+// Canonical skill key (matches a keyword string used in positions.ts) ->
+// alternate forms a searcher might type. See design/ARCHITECTURE.md
+// ("Synonym-aware skill search") and src/lib/skillSearch.ts, which
+// normalizes both the query and each highlight's keywords through this
+// map (case-insensitively) before matching.
+export const skillSynonyms: Record<string, string[]> = {
+  ".NET": ["dotnet", "dot net", ".net framework", "dotnet framework"],
+  AngularJS: ["angular js", "angular 1", "angularjs 1.x"],
+  "API integration": ["api integrations", "third-party api", "third party api"],
+  "Architecture review": ["architectural review", "design review"],
+  "ASP.NET": ["asp net", "aspnet", "asp.net mvc", "asp.net web forms", "web forms"],
+  Azure: ["microsoft azure", "azure web apps", "windows azure"],
+  "C#": ["csharp", "c-sharp"],
+  "CI/CD": ["ci cd", "continuous integration", "continuous delivery", "continuous deployment"],
+  "Claude AI": ["claude", "anthropic", "anthropic claude"],
+  "Compliance reporting": ["compliance", "regulatory reporting", "state reporting"],
+  "Crisis management": ["incident leadership", "crisis leadership"],
+  "Cross-team collaboration": ["cross team collaboration", "cross-functional collaboration", "cross functional"],
+  "Developer tooling": ["dev tooling", "developer experience", "devex", "internal tooling"],
+  DevOps: ["dev ops"],
+  "Entity Framework": ["ef", "ef core", "ef6", "entity framework 6", "entity framework core"],
+  Fintech: ["financial technology", "financial services"],
+  GraphQL: ["graph ql"],
+  gRPC: ["grpc", "rpc"],
+  Hiring: ["recruiting", "interviewing", "technical interviewing"],
+  "Incident response": ["incident management", "on-call", "oncall", "outage response"],
+  Java: ["java 8", "core java"],
+  "Lean Six Sigma": ["six sigma", "lean six sigma green belt", "green belt", "process excellence"],
+  MCP: ["model context protocol", "mcp server"],
+  Mentorship: ["mentoring", "coaching", "technical mentorship"],
+  Microservices: ["micro services", "microservice architecture", "service-oriented architecture", "soa"],
+  "Node.js": ["nodejs", "node"],
+  "Offline-first architecture": ["offline first", "offline-first", "offline support"],
+  Onboarding: ["new hire onboarding", "ramp-up", "ramp up"],
+  "Open source": ["open-source", "oss"],
+  "Performance diagnostics": ["performance tuning", "performance diagnosis", "performance troubleshooting"],
+  "Process improvement": ["process optimization", "process engineering"],
+  "Progressive Web App": ["pwa", "progressive web apps"],
+  "Project management": ["project planning", "delivery management"],
+  "Query plan analysis": ["query plans", "execution plan analysis", "query plan diagnostics"],
+  "Queue-based architecture": ["message queue", "queueing", "async processing", "asynchronous processing"],
+  "Risk analysis": ["risk assessment", "risk management"],
+  "Root cause analysis": ["rca", "root cause diagnosis"],
+  Salesforce: ["sfdc", "salesforce marketing cloud", "salesforce automation"],
+  Security: ["infosec", "information security", "application security", "appsec"],
+  "SOX compliance": ["sox", "sarbanes-oxley", "sarbanes oxley"],
+  "SQL Server": ["sql", "mssql", "microsoft sql server", "t-sql", "tsql"],
+  SSRS: ["sql server reporting services", "reporting services"],
+  "Systems architecture": ["system architecture", "systems design", "system design", "software architecture"],
+  "Team leadership": ["people leadership", "engineering leadership", "team lead"],
+  "Technical leadership": ["tech leadership", "technical lead", "tech lead"],
+  TypeScript: ["ts"],
+  "Vue.js": ["vuejs", "vue"],
+  "Web API": ["webapi", "asp.net web api", "rest api", "restful api"],
+  "Windows domain infrastructure": ["active directory", "windows domain", "domain controllers"],
+};

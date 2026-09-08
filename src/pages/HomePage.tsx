@@ -1,42 +1,47 @@
-import { Typography, Stack, Link as MuiLink } from "@mui/material";
+import { Typography, Stack, Card, CardActionArea, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
+
+const LINK_CARDS = [
+  {
+    to: "/resume",
+    label: "Resume",
+    blurb: "Principal, Staff, and Senior resumes tailored by role level, drawn from one shared work history.",
+  },
+  {
+    to: "/cv",
+    label: "Full CV",
+    blurb: "Every position and highlight, laid out chronologically, regardless of tier.",
+  },
+  {
+    to: "/skills",
+    label: "Search by skill",
+    blurb: "A searchable skills index across every resume tier.",
+  },
+];
 
 export function HomePage() {
   return (
-    <Stack spacing={2} sx={{ p: 4, maxWidth: "60ch" }}>
+    <Stack spacing={3} sx={{ p: 4, width: "100%" }}>
       <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
         Steven Chock
       </Typography>
-      <Typography>
-        Three resumes, tailored by role level, drawn from one shared work history &mdash;
-        plus a searchable skills index across all of them.
+      <Typography sx={{ maxWidth: "70ch" }}>
+        Resumes tailored by role level, drawn from one shared work history &mdash; plus a
+        searchable skills index across all of them.
       </Typography>
-      <Stack component="ul" spacing={1} sx={{ listStyle: "none", p: 0 }}>
-        <li>
-          <MuiLink component={Link} to="/resume/principal">
-            Principal Software Engineer resume
-          </MuiLink>
-        </li>
-        <li>
-          <MuiLink component={Link} to="/resume/staff">
-            Staff Software Engineer resume
-          </MuiLink>
-        </li>
-        <li>
-          <MuiLink component={Link} to="/resume/senior">
-            Senior Software Engineer resume
-          </MuiLink>
-        </li>
-        <li>
-          <MuiLink component={Link} to="/cv">
-            Full CV
-          </MuiLink>
-        </li>
-        <li>
-          <MuiLink component={Link} to="/skills">
-            Search by skill
-          </MuiLink>
-        </li>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+        {LINK_CARDS.map(({ to, label, blurb }) => (
+          <Card key={to} variant="outlined" sx={{ flex: 1 }}>
+            <CardActionArea component={Link} to={to} sx={{ height: "100%" }}>
+              <CardContent>
+                <Typography variant="h2" sx={{ fontSize: "var(--font-size-lg)", mb: 1 }}>
+                  {label}
+                </Typography>
+                <Typography color="text.secondary">{blurb}</Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        ))}
       </Stack>
     </Stack>
   );
