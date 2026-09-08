@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { Typography, Stack, Card, CardContent } from "@mui/material";
+import { Typography, Stack, Card, CardContent, Box } from "@mui/material";
 import { positions } from "../data/resume/positions";
 import { filterTierHighlights } from "../lib/skillSearch";
 import { KeywordChips } from "../components/KeywordChips";
 import { SkillFilterField } from "../components/SkillFilterField";
+import { PrintButton } from "../components/PrintButton";
 import type { Tier } from "../types/resume";
 
 const VALID_TIERS: Tier[] = ["principal", "staff", "senior"];
@@ -30,20 +31,25 @@ export function ResumePage() {
 
   return (
     <Stack spacing={3} sx={{ p: 4, maxWidth: "70ch" }}>
-      <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
-        {TIER_LABEL[validTier]} resume
-      </Typography>
-      <SkillFilterField
-        id="resume-skill-filter"
-        label="Filter by skill"
-        value={skillQuery}
-        onChange={setSkillQuery}
-      />
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 2 }}>
+        <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
+          {TIER_LABEL[validTier]} resume
+        </Typography>
+        <PrintButton />
+      </Box>
+      <Box className="no-print">
+        <SkillFilterField
+          id="resume-skill-filter"
+          label="Filter by skill"
+          value={skillQuery}
+          onChange={setSkillQuery}
+        />
+      </Box>
       {matches.length === 0 ? (
         <Typography>No highlights match that skill filter.</Typography>
       ) : (
         <Stack spacing={2}>
-          {matches.map(({ position, highlight }) => (
+          {matches.map(({ position, highlight, narrative }) => (
             <Card key={highlight.id} variant="outlined">
               <CardContent>
                 <Typography variant="h2" sx={{ fontSize: "var(--font-size-lg)" }}>
@@ -52,9 +58,9 @@ export function ResumePage() {
                 <Typography color="text.secondary" sx={{ mb: 1 }}>
                   {position.start} &ndash; {position.end}
                 </Typography>
-                <Typography>{highlight.context}</Typography>
-                <Typography>{highlight.action}</Typography>
-                <Typography sx={{ mb: 1 }}>{highlight.result}</Typography>
+                <Typography>{narrative.context}</Typography>
+                <Typography>{narrative.action}</Typography>
+                <Typography sx={{ mb: 1 }}>{narrative.result}</Typography>
                 <KeywordChips keywords={highlight.keywords} />
               </CardContent>
             </Card>

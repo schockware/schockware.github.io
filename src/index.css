@@ -1,0 +1,36 @@
+/* App-level styling that doesn't belong in the shared tokens.css
+   (that file is consumed by both the React+MUI and Vue+Vuetify
+   standards variants and stays framework/print-agnostic). */
+
+@media print {
+  /* Nav, skill filter inputs, and the print button itself have no
+     place on a printed/PDF resume -- ATS.md's single-column,
+     no-extraneous-chrome guidance applies here too. */
+  .no-print {
+    display: none !important;
+  }
+
+  /* MUI's outlined Card border/shadow reads as visual chrome on
+     screen but wastes ink and looks odd on paper -- flatten to plain
+     content blocks with spacing instead of bordered cards. */
+  .MuiCard-root {
+    border: none !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  /* Chips render as filled color pills on screen; on a printed page
+     (often grayscale) that can reduce legibility and looks like an
+     image to a skim-reader. Keep them as plain outlined text instead
+     -- still visibly distinct, still real selectable text. */
+  .MuiChip-root {
+    background: none !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}

@@ -1,6 +1,7 @@
-import { Typography, Stack, Card, CardContent } from "@mui/material";
+import { Typography, Stack, Card, CardContent, Box } from "@mui/material";
 import { positions } from "../data/resume/positions";
 import { KeywordChips } from "../components/KeywordChips";
+import { PrintButton } from "../components/PrintButton";
 
 // Full chronological CV, all positions and highlights regardless of
 // tier weighting -- see specs/extensions/RESUME_FRAMEWORK_CHOICE.md
@@ -8,9 +9,12 @@ import { KeywordChips } from "../components/KeywordChips";
 export function CvPage() {
   return (
     <Stack spacing={3} sx={{ p: 4, maxWidth: "70ch" }}>
-      <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
-        Curriculum Vitae
-      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 2 }}>
+        <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
+          Curriculum Vitae
+        </Typography>
+        <PrintButton />
+      </Box>
       {positions.length === 0 ? (
         <Typography>No positions yet.</Typography>
       ) : (

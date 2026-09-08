@@ -4,6 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import { createAppTheme } from "../theme";
 import "../tokens.css";
+import "./index.css";
 import { App } from "./App";
 
 // tokens.css above is applied to the DOM by the time this runs, so

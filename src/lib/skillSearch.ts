@@ -1,5 +1,5 @@
 import { skillSynonyms } from "../data/resume/skillSynonyms";
-import type { Position, StructuredHighlight, Tier } from "../types/resume";
+import type { Position, StructuredHighlight, Tier, TierNarrative } from "../types/resume";
 
 const canonicalByAlias = new Map<string, string>();
 for (const [canonical, aliases] of Object.entries(skillSynonyms)) {
@@ -33,6 +33,21 @@ export interface SkillMatch {
   highlight: StructuredHighlight;
 }
 
+/**
+ * Resolves the context/action/result a given tier should actually see,
+ * falling back field-by-field to the highlight's default narrative when a
+ * tier has no override -- so a highlight can override just e.g. `action`
+ * without having to restate `context`/`result` too.
+ */
+export function resolveNarrative(highlight: StructuredHighlight, tier: Tier): Required<TierNarrative> {
+  const override = highlight.narrative?.[tier];
+  return {
+    context: override?.context ?? highlight.context,
+    action: override?.action ?? highlight.action,
+    result: override?.result ?? highlight.result,
+  };
+}
+
 /** Every highlight (any tier) whose keywords cover all query terms -- used by the /skills page. */
 export function searchAllPositions(positions: Position[], rawQuery: string): SkillMatch[] {
   const canonicalTerms = parseSkillQuery(rawQuery);
@@ -47,20 +62,30 @@ export function searchAllPositions(positions: Position[], rawQuery: string): Ski
   return matches;
 }
 
+export interface TierSkillMatch extends SkillMatch {
+  emphasis: "lead" | "support";
+  narrative: Required<TierNarrative>;
+}
+
 /** Highlights for one tier, filtered further by a skill query -- used inline on /resume/:tier. */
 export function filterTierHighlights(
   positions: Position[],
   tier: Tier,
   rawQuery: string,
-): SkillMatch[] {
+): TierSkillMatch[] {
   const canonicalTerms = parseSkillQuery(rawQuery);
-  const matches: (SkillMatch & { emphasis: "lead" | "support" })[] = [];
+  const matches: TierSkillMatch[] = [];
   for (const position of positions) {
     for (const highlight of position.highlights) {
       const weight = highlight.tiers.find((t) => t.tier === tier);
       if (!weight?.include) continue;
       if (highlightMatches(highlight, canonicalTerms)) {
-        matches.push({ position, highlight, emphasis: weight.emphasis ?? "support" });
+        matches.push({
+          position,
+          highlight,
+          emphasis: weight.emphasis ?? "support",
+          narrative: resolveNarrative(highlight, tier),
+        });
       }
     }
   }

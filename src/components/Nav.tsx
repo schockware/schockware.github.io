@@ -12,7 +12,12 @@ const linkStyle = ({ isActive }: { isActive: boolean }) => ({
 
 export function Nav() {
   return (
-    <Box component="nav" aria-label="Main" sx={{ p: 2, borderBottom: "1px solid var(--color-border)" }}>
+    <Box
+      component="nav"
+      aria-label="Main"
+      className="no-print"
+      sx={{ p: 2, borderBottom: "1px solid var(--color-border)" }}
+    >
       <Stack direction="row" spacing={3} component="ul" sx={{ listStyle: "none", m: 0, p: 0 }}>
         {TIERS.map((tier) => (
           <li key={tier}>
