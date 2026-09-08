@@ -1,0 +1,92 @@
+/*
+ * Shared design tokens for React+MUI and Vue+Vuetify SPAs.
+ * Consumed as CSS custom properties so both frameworks' theme
+ * layers (MUI theme.palette / Vuetify theme.colors) can read the
+ * same source of truth instead of duplicating values.
+ *
+ * Replace placeholder values with real brand values.
+ *
+ * Renaming or removing a variable? See TOKENS_CHANGELOG.md in this
+ * folder — add an entry there in the same change, and keep the old
+ * name as a `var()` alias for one release cycle where practical, so
+ * a solution repo pulling an update doesn't see a silent breakage.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Color: brand */
+  --color-primary: #3b5bdb;
+  --color-primary-hover: #2f4bc7;
+  --color-secondary: #ae3ec9;
+  --color-accent: #12b886;
+
+  /* Color: semantic */
+  --color-success: #2f9e44;
+  --color-warning: #f08c00;
+  --color-danger: #e03131;
+  --color-info: #1c7ed6;
+
+  /* Color: surfaces (light) */
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-border: #dee2e6;
+  --color-text: #1a1b1e;
+  --color-text-muted: #5c5f66;
+
+  /* Type */
+  --font-family-base: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-family-mono: ui-monospace, "Cascadia Code", monospace;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+
+  /* Spacing scale (4px base unit) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.16);
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 320ms;
+  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1a1b1e;
+    --color-bg-subtle: #141517;
+    --color-surface: #25262b;
+    --color-border: #373a40;
+    --color-text: #f4f5f7;
+    --color-text-muted: #a6a7ab;
+  }
+}
