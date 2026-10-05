@@ -38,11 +38,11 @@ export const positions: Position[] = [
       {
         id: "red-rover-query-compile-diagnosis",
         context:
-          "A large-scale HR platform serving school districts nationwide was suffering recurring, system-wide weekly outages. Leadership had repeatedly misdiagnosed the root cause, and initial mitigation was scaling hardware up to 80 cores rather than addressing the underlying design.",
+          "A large-scale HR platform serving school districts nationwide was suffering recurring, system-wide weekly outages, with hardware scaling (up to 80 cores) as the initial mitigation.",
         action:
-          "Identified the root cause as a custom GraphQL-over-Entity-Framework-6 framework, and independently built DMV-query-based evidence to prove the connection after the diagnosis was initially rejected. Proposed and implemented interim mitigations (splitting reporting and read-only load onto separate databases, repurposing existing Hyperscale HA replicas), then validated the combined long-term fix contributed by two colleagues (an EF 8 upgrade plus a custom EF Expression extension forcing OPENJSON/parameterization).",
+          "Identified the root cause as a custom GraphQL-over-Entity-Framework-6 framework, and built DMV-query-based evidence to prove the connection. Proposed and implemented interim mitigations (splitting reporting and read-only load onto separate databases, repurposing existing Hyperscale HA replicas), then validated the combined long-term fix contributed by two colleagues (an EF 8 upgrade plus a custom EF Expression extension forcing OPENJSON/parameterization).",
         result:
-          "Eliminated the recurring weekly outages driving a systemic RESOURCE_SEMAPHORE_QUERY_COMPILE crisis, correctly diagnosing the root cause against initial resistance from leadership.",
+          "Eliminated the recurring weekly outages driving a systemic RESOURCE_SEMAPHORE_QUERY_COMPILE crisis, by establishing the root cause with query-level evidence.",
         keywords: [
           "SQL Server",
           "Entity Framework",
@@ -74,7 +74,7 @@ export const positions: Position[] = [
       {
         id: "red-rover-remediation-program",
         context:
-          "Roughly half of a 3.5-year tenure was spent addressing performance problems traced back to a single organizational decision: keeping a monolithic database architecture across the company's Pre-seed, Seed, and Series A growth stages.",
+          "Roughly half of a 3.5-year tenure was spent addressing performance problems traced back to a monolithic database architecture carried across the company's Pre-seed, Seed, and Series A growth stages.",
         action:
           "Drove a systemic diagnosis identifying 13 distinct performance issues as manifestations of the same underlying scaling-architecture deficit, then led the remediation program addressing them.",
         result:
@@ -110,34 +110,9 @@ export const positions: Position[] = [
         ],
       },
       {
-        id: "red-rover-frontend-standards",
-        context:
-          "The company's core product was a React (web) + React Native (mobile) monolith sharing one GraphQL/REST API, but had no enforced frontend engineering standards. As newer products were added, they drifted onto server-side-rendered React, competing UI component libraries, and inconsistent folder structures, with repositories proliferating rather than converging.",
-        action:
-          "Diagnosed the fragmentation as a standards-governance gap rather than a series of unrelated technical choices, and proposed consolidating the web and React Native codebases into a shared monorepo to arrest the drift.",
-        result:
-          "Correctly identified the architectural root cause of a growing frontend consistency problem; the monorepo proposal did not get organizational buy-in, so the underlying fragmentation persisted -- an honest example of a correct diagnosis that leadership didn't act on, distinct from the SQL performance crisis where the fix was eventually adopted.",
-        keywords: ["React", "React Native", "TypeScript", "GraphQL", "Systems architecture", "Technical leadership"],
-        narrative: {
-          principal: {
-            context:
-              "A multi-product React/React Native platform had no enforced frontend engineering standards, and organizational tolerance for architectural inconsistency (explicitly, per leadership, prioritizing shipped value over standards) let server-side-rendered React, competing UI component libraries, and divergent folder structures proliferate across newer products.",
-            action:
-              "Made the case for a monorepo consolidating the web and mobile codebases as a structural fix to the drift, arguing it at the level of engineering standards and long-term maintainability rather than any single product's immediate roadmap.",
-            result:
-              "Correctly diagnosed a systemic frontend-governance gap before it compounded further; the proposal did not get leadership buy-in, illustrating the limits of technical advocacy against an organization's explicit anti-standards culture -- an honest account of a sound call not adopted, not a resolved success.",
-          },
-        },
-        tiers: [
-          { tier: "principal", include: true, emphasis: "support" },
-          { tier: "staff", include: true, emphasis: "lead" },
-          { tier: "senior", include: true, emphasis: "support" },
-        ],
-      },
-      {
         id: "red-rover-hiring-mentorship",
         context:
-          "As the company scaled rapidly, new engineers needed both technical vetting and onboarding into a system whose original authors were, as a group, weak at documenting their own decisions.",
+          "As the company scaled rapidly, new engineers needed both technical vetting and onboarding into a system with limited written documentation of its design decisions.",
         action:
           "Screened engineering candidates for technical skill and culture fit, and became a default point of contact for new hires trying to understand how existing systems actually worked, including pair-programming to ramp new hires up and identify individual strengths.",
         result: "Maintained approximately 80% engineering retention over an 18-month period.",
@@ -145,7 +120,7 @@ export const positions: Position[] = [
         narrative: {
           principal: {
             result:
-              "Sustained an organizational knowledge-transfer function informally, in a company that had no structural mechanism for it -- keeping engineering retention at approximately 80% over 18 months through a rapid, undocumented scaling period.",
+              "Sustained an organizational knowledge-transfer function informally -- keeping engineering retention at approximately 80% over 18 months through a rapid scaling period.",
           },
         },
         tiers: [
@@ -166,11 +141,11 @@ export const positions: Position[] = [
       {
         id: "qw-elm-architecture-correction",
         context:
-          "A greenfield direct-to-customer car insurance product's backend was committed to a top-down architectural bet -- forcing gRPC and Akka.NET into Windows Azure Web App containers -- that only supported HTTP/1.0 at the time, making the approach a non-starter.",
+          "A greenfield direct-to-customer car insurance product's backend was planned around gRPC and Akka.NET running in Windows Azure Web App containers, which only supported HTTP/1.0 at the time.",
         action:
-          "Documented the technical incompatibility concretely and demonstrated why the approach couldn't work, moving the team off it before it cost further schedule.",
+          "Documented the technical incompatibility concretely and demonstrated why the approach couldn't work, moving the team to a viable design before it cost further schedule.",
         result:
-          "Corrected a bad top-down technical bet early, keeping the greenfield product's delivery schedule intact despite the surrounding project's early management issues.",
+          "Corrected the architecture early, keeping the greenfield product's delivery schedule intact.",
         keywords: ["Architecture review", "gRPC", "Azure", ".NET", "Technical leadership"],
         narrative: {
           senior: {
@@ -187,18 +162,18 @@ export const positions: Position[] = [
       {
         id: "qw-carrier-integration-rescue",
         context:
-          "The product's entire economic model routed through a sister team's carrier-integration API layer -- for roughly three months, essentially zero integration calls succeeded end to end, amid a leadership shakeup on that team.",
+          "The product's entire economic model routed through a sister team's carrier-integration API layer -- for roughly three months, essentially zero integration calls succeeded end to end.",
         action:
-          "Trained the team's surviving backend developer on the integration's actual goal, diagnosed the existing code as unstructured hand-built XML with no formal contracts, and got a proper contract-based rebuild to a working model within three days by sharing established contract patterns from his own team.",
+          "Worked with the team's backend developer on the integration's actual goal, diagnosed the existing code as hand-built XML without formal contracts, and got a proper contract-based rebuild to a working model within three days by sharing established contract patterns from his own team.",
         result:
           "Unblocked the product's revenue-critical integration path, turning a three-month stall of zero successful end-to-end calls into a working model within days.",
         keywords: ["C#", "API integration", "Systems architecture", "Cross-team collaboration"],
         narrative: {
           principal: {
             context:
-              "A sister team's carrier-integration layer -- the literal revenue funnel for a greenfield product's entire economic model -- had produced essentially zero successful end-to-end calls for three months, while that team absorbed a leadership shakeup.",
+              "A sister team's carrier-integration layer -- the literal revenue funnel for a greenfield product's entire economic model -- had produced essentially zero successful end-to-end calls for three months.",
             action:
-              "Diagnosed the systemic failure mode behind the stall (unstructured, contract-less integration code) as an org-level risk to the product's viability, not just a bug, and drove the team toward a contract-based standard by transferring his own team's existing patterns.",
+              "Diagnosed the systemic failure mode behind the stall (integration code without formal contracts) as an org-level risk to the product's viability, not just a bug, and drove the team toward a contract-based standard by transferring his own team's existing patterns.",
             result:
               "Converted a three-month, zero-success revenue-path failure into a working model within three days, protecting the product's core economic dependency without waiting for a formal cross-team escalation.",
           },
@@ -212,7 +187,7 @@ export const positions: Position[] = [
       {
         id: "qw-vendor-doc-drift-fixes",
         context:
-          "Two other dependent teams (SMS and email delivery, both built on Salesforce) were blocked or struggling: one because Salesforce's own published documentation was a full version behind the software actually running on their servers, the other overwhelmed navigating Salesforce's marketing-automation tooling.",
+          "Two other dependent teams (SMS and email delivery, both built on Salesforce) faced integration blockers: one because Salesforce's own published documentation was a full version behind the software actually running on their servers, the other navigating Salesforce's marketing-automation tooling.",
         action:
           "Reverse-engineered the correct API version directly from the SMS team's source code and built a corrected integration; separately, paired directly with the email team to lock correct automation commands into source code instead of leaving them ad hoc.",
         result:
@@ -289,44 +264,15 @@ export const positions: Position[] = [
     end: "2020-02",
     highlights: [
       {
-        id: "bcit-ryuk-technical-diagnosis",
+        id: "bcit-ransomware-recovery",
         context:
-          "A Ryuk ransomware attack infected 2,000+ machines across multiple states, costing the organization an estimated $1M+/day while unresolved. The incident technical lead's recovery plan -- re-imaging every machine one at a time via USB stick -- was driven by a fear of reinfection over the network, including PXE-based imaging.",
-        action:
-          "Diagnosed that the actual breach originated at the domain servers rather than the network fabric itself, meaning the fear driving the USB-only approach targeted the wrong layer of the system. Proved out a PXE-based network imaging approach on the recovery's final batch of machines once given the opportunity.",
-        result:
-          "Imaged the final 200 machines in approximately one day via PXE, versus an estimated 3-4 days under the USB-based approach used for the bulk of the recovery -- a concrete, quantified technical correction of a rejected diagnosis.",
-        keywords: [
-          "Incident response",
-          "Security",
-          "Windows domain infrastructure",
-          "Root cause analysis",
-          "Systems architecture",
-        ],
+          "A company-wide ransomware incident required a large-scale technical recovery.",
+        action: "Co-led the technical recovery from a company-wide ransomware incident.",
+        result: "The recovery absorbed a large part of my time there.",
+        keywords: ["Incident response", "Technical leadership"],
         tiers: [
-          { tier: "principal", include: true, emphasis: "lead" },
-          { tier: "staff", include: true, emphasis: "lead" },
-          { tier: "senior", include: true, emphasis: "lead" },
-        ],
-      },
-      {
-        id: "bcit-ryuk-crisis-leadership",
-        context:
-          "During the same ransomware incident, formal leadership lost the team's trust mid-crisis -- unable to communicate clearly under pressure, and creating a real, felt attrition risk across nearly the entire rank-and-file staff.",
-        action:
-          "Stepped into a de facto co-leadership role alongside a colleague, building runbooks that let non-technical staff directly assist with recovery, and standing up a back-channel communication structure with daily check-ins that ran roughly 20 hours a day, 6 days a week.",
-        result:
-          "Sustained near-total team retention through the highest-attrition-risk point of a multi-week, $1M+/day incident, until the organization was no longer losing money daily.",
-        keywords: ["Incident response", "Technical leadership", "Crisis management", "Mentorship"],
-        narrative: {
-          senior: {
-            action:
-              "Ran daily morning and end-of-day check-ins directly with frontline staff on a back channel he and a colleague set up, naming pain points and iterating on the recovery process in real time, sustained roughly 20 hours a day, 6 days a week.",
-          },
-        },
-        tiers: [
-          { tier: "principal", include: true, emphasis: "lead" },
-          { tier: "staff", include: true, emphasis: "lead" },
+          { tier: "principal", include: true, emphasis: "support" },
+          { tier: "staff", include: true, emphasis: "support" },
           { tier: "senior", include: true, emphasis: "support" },
         ],
       },
@@ -383,7 +329,7 @@ export const positions: Position[] = [
       {
         id: "jeffco-strapp-rebuild",
         context:
-          "A district's Special Education state reporting had effectively been done by guesswork after no one on staff understood how the underlying third-party system worked, leaving an estimated $1M-$5M of $15M in annual funding unclaimed.",
+          "A district's Special Education state reporting had lacked an in-house understanding of how the underlying third-party system worked, leaving an estimated $1M-$5M of $15M in annual funding unclaimed.",
         action:
           "Led a full, properly-resourced rebuild of a from-scratch state reporting and compliance system (AngularJS, ASP.NET Web API, MSSQL), working directly with the district's Special Education manager to get accurate domain requirements firsthand.",
         result:
@@ -404,20 +350,20 @@ export const positions: Position[] = [
       {
         id: "jeffco-internal-platform-build",
         context:
-          "A 3-5 person team was absorbing an estimated 90% of all custom report/application requests across a district-wide pool of roughly 30 people on report-adjacent teams, with no budget authorized for commercial reporting tooling.",
+          "A 3-5 person team was absorbing an estimated 90% of all custom report/application requests across a district-wide pool of roughly 30 people on report-adjacent teams, without commercial reporting tooling available.",
         action:
           "Built an internal application repository (ORCA) plus a from-scratch report-request management service and a companion WebAPI, so other district teams could integrate request-management functionality into their own tooling rather than duplicating it.",
         result:
-          "Delivered a self-built internal platform in place of denied commercial tooling, adopted by other teams district-wide as reusable infrastructure rather than a one-off internal tool.",
+          "Delivered a self-built internal platform in place of commercial tooling, adopted by other teams district-wide as reusable infrastructure rather than a one-off internal tool.",
         keywords: ["C#", "ASP.NET", "Microservices", "Web API", "Systems architecture", "Developer tooling"],
         narrative: {
           principal: {
             context:
-              "With commercial reporting tooling (e.g. Tableau) denied on budget grounds, a single team was structurally positioned to become the district's only source of custom reporting capability, or to fail visibly under demand it couldn't meet.",
+              "Without commercial reporting tooling (e.g. Tableau) available, a single team was structurally positioned to become the district's only source of custom reporting capability, or to fail visibly under demand it couldn't meet.",
             action:
               "Set the technical direction to build reusable, service-based infrastructure instead of one-off internal tooling -- a request-management platform (ORCA) plus a WebAPI other district teams could integrate against directly rather than depend on his team's UI.",
             result:
-              "Established a piece of shared district infrastructure other teams adopted directly, turning a denied-procurement constraint into a reusable internal platform rather than a bottlenecked single-team dependency.",
+              "Established a piece of shared district infrastructure other teams adopted directly, turning a tooling constraint into a reusable internal platform rather than a bottlenecked single-team dependency.",
           },
         },
         tiers: [
@@ -429,7 +375,7 @@ export const positions: Position[] = [
       {
         id: "jeffco-team-leadership",
         context:
-          "District survey data identified two other teams as ineffective, routing the overwhelming majority of the district's custom report and application demand onto his team of 3-5 developers.",
+          "The overwhelming majority of the district's custom report and application demand was routed to his team of 3-5 developers.",
         action:
           "Led the team responsible for absorbing that demand while functioning as a de facto development manager and project manager on top of hands-on lead development duties.",
         result:
@@ -476,9 +422,9 @@ export const positions: Position[] = [
       {
         id: "jeffco-engineering-turnaround",
         context:
-          "A severely under-resourced team was carrying a reported 1,500-ticket backlog and per-release defect rates around 35%, while operating in an organizational environment with active cross-team dysfunction.",
+          "A severely under-resourced team was carrying a reported 1,500-ticket backlog and per-release defect rates around 35%.",
         action:
-          "Ran interference to protect two strong new hires' time from irrational or wasteful assignments, and led renegotiation of unrealistic ticket scope directly with requesting groups rather than grinding through every ticket as originally scoped.",
+          "Protected two strong new hires' time for high-value work, and led renegotiation of ticket scope directly with requesting groups rather than grinding through every ticket as originally scoped.",
         result:
           "Reduced a 1,500-ticket backlog to zero on a sustainable basis and cut per-release defect rates from roughly 35% to 4%.",
         keywords: ["Technical leadership", "Team leadership", "Process improvement", "Mentorship"],
@@ -506,11 +452,11 @@ export const positions: Position[] = [
       {
         id: "jeffco-cross-team-collaboration",
         context:
-          "Chronic cross-team friction over shared APIs existed in an environment where two adversarial teams avoided real collaboration and routed blame to others.",
+          "Chronic cross-team friction over shared APIs limited collaboration between teams.",
         action:
-          "Started recurring, deliberately agenda-less informal working sessions, gradually inviting members of more moderate adversarial teams into low-stakes discussions to build rapport before addressing the shared APIs causing friction.",
+          "Started recurring, deliberately agenda-less informal working sessions, gradually inviting members of other teams into low-stakes discussions to build rapport before addressing the shared APIs causing friction.",
         result:
-          "Converted a chronic cross-team API conflict into working solutions for both sides after building sufficient trust through sustained, informal collaboration.",
+          "Converted a chronic cross-team API conflict into working solutions for both sides through sustained, informal collaboration.",
         keywords: ["Cross-team collaboration", "Technical leadership", "Process improvement"],
         tiers: [
           { tier: "principal", include: false },

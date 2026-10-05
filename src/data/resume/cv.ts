@@ -5,7 +5,7 @@ import type { SkillGroup, Certification, IndependentProject } from "../../types/
 // and specs/extensions/RESUME_FRAMEWORK_CHOICE.md ("CV Stays Separate").
 
 export const summary =
-  "Software engineer with 15+ years across public-sector EdTech and fintech/insurance, specializing in diagnosing and fixing systemic performance and architecture problems that others had misdiagnosed or given up on. Recurring pattern: identify a root cause against initial resistance, build the evidence to prove it, then either fix it directly or drive the organizational remediation. Comfortable operating from hands-on SQL Server internals up through cross-team architectural governance.";
+  "Software engineer with 15+ years across public-sector EdTech and fintech/insurance, specializing in diagnosing and fixing systemic performance and architecture problems. Recurring pattern: identify a root cause, build the evidence to prove it, then either fix it directly or drive the organizational remediation. Comfortable operating from hands-on SQL Server internals up through cross-team architectural governance.";
 
 export const skillGroups: SkillGroup[] = [
   {
@@ -34,7 +34,6 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       "Azure (Web Apps, Service Bus, Event Hub/Grid, App Insights, B2C)",
       "Model Context Protocol (MCP)",
-      "Windows domain infrastructure / PXE imaging",
       "CI/CD (Azure DevOps, Octopus Deploy)",
     ],
   },
