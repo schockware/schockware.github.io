@@ -16,7 +16,20 @@
   .MuiCard-root {
     border: none !important;
     box-shadow: none !important;
+  }
+
+  /* Cards wrap a whole position (header plus several highlights), so
+     avoiding a break inside the card pushes it to the next page and leaves
+     the previous one mostly blank. Let cards flow across pages and only
+     protect the smaller units inside them. */
+  .resume-highlight,
+  .MuiListItem-root {
     break-inside: avoid;
+  }
+
+  /* Keep a position's title/date line with the content that follows it. */
+  .MuiCardContent-root > .MuiTypography-root {
+    break-after: avoid;
   }
 
   /* Chips render as filled color pills on screen; on a printed page
@@ -61,5 +74,15 @@
   p, .MuiTypography-root {
     margin-bottom: 4px !important;
     line-height: 1.3 !important;
+  }
+
+  /* The blanket Stack gap and Typography margin above would otherwise
+     override the 0.25 spacing set on this list and add up to ~12px per line. */
+  .earlier-experience.MuiStack-root {
+    gap: 2px !important;
+  }
+
+  .earlier-experience > .MuiTypography-root {
+    margin-bottom: 0 !important;
   }
 }

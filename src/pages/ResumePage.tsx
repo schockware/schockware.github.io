@@ -73,7 +73,7 @@ export function ResumePage() {
                   </Typography>
                   <Stack spacing={1}>
                     {highlights.map(({ highlight, narrative }) => (
-                      <div key={highlight.id}>
+                      <div key={highlight.id} className="resume-highlight">
                         <Typography sx={{ mb: 1 }}>{narrative.context}</Typography>
                         <Typography sx={{ mb: 1 }}>{narrative.action}</Typography>
                         <Typography sx={{ mb: 1 }}>{narrative.result}</Typography>
@@ -90,7 +90,7 @@ export function ResumePage() {
               <Typography variant="h2" sx={{ fontSize: "var(--font-size-lg)", mb: 1 }}>
                 Earlier Experience
               </Typography>
-              <Stack spacing={0.5}>
+              <Stack spacing={0.25} className="earlier-experience">
                 {briefGroups.map(({ position }) => (
                   <Typography key={position.id}>
                     {position.title}, {position.employer} ({position.start} &ndash; {position.end})
