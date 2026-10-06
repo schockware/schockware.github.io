@@ -2,6 +2,7 @@ import { Typography, Stack, Card, CardContent, Box, List, ListItem } from "@mui/
 import { positions } from "../data/resume/positions";
 import { summary, skillGroups, certifications, independentProjects } from "../data/resume/cv";
 import { KeywordChips } from "../components/KeywordChips";
+import { TechnologySummary } from "../components/TechnologySummary";
 import { PrintButton } from "../components/PrintButton";
 import { ContactHeader } from "../components/ContactHeader";
 
@@ -65,6 +66,7 @@ export function CvPage() {
                   <Typography color="text.secondary" sx={{ mb: 1 }}>
                     {position.start} &ndash; {position.end}
                   </Typography>
+                  <TechnologySummary technologies={position.technologies} />
                   <List dense sx={{ listStyleType: "disc", pl: 2 }}>
                     {position.highlights.map((highlight) => (
                       <ListItem key={highlight.id} sx={{ display: "list-item", p: 0 }}>

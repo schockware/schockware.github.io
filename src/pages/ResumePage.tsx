@@ -5,6 +5,7 @@ import { positions } from "../data/resume/positions";
 import { tierSummaries } from "../data/resume/summaries";
 import { groupTierHighlightsByPosition } from "../lib/skillSearch";
 import { KeywordChips } from "../components/KeywordChips";
+import { TechnologySummary } from "../components/TechnologySummary";
 import { SkillFilterField } from "../components/SkillFilterField";
 import { PrintButton } from "../components/PrintButton";
 import { ContactHeader } from "../components/ContactHeader";
@@ -71,6 +72,7 @@ export function ResumePage() {
                   <Typography color="text.secondary" sx={{ mb: 1 }}>
                     {position.start} &ndash; {position.end}
                   </Typography>
+                  <TechnologySummary technologies={position.technologies} />
                   <Stack spacing={1}>
                     {highlights.map(({ highlight, narrative }) => (
                       <div key={highlight.id} className="resume-highlight">

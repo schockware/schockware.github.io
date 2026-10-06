@@ -32,6 +32,10 @@ export interface Position {
   title: string;
   start: string;
   end: string | "present";
+  // Every technology used in the role, authored separately from highlight
+  // keywords: highlights are tier-filtered and omit tech from excluded ones,
+  // so a union of keywords would understate the stack.
+  technologies: string[];
   highlights: StructuredHighlight[];
   // "brief" positions render as a single title/employer/dates line under an
   // "Earlier Experience" heading on the resume, with no highlight cards --

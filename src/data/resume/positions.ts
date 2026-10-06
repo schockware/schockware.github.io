@@ -10,6 +10,7 @@ export const positions: Position[] = [
     title: "Health Recovery Break & Independent Projects",
     start: "2026-04",
     end: "present",
+    technologies: ["SQL Server", "Model Context Protocol", "Claude AI"],
     highlights: [
       {
         id: "independent-mssql-tooling-generalization",
@@ -34,6 +35,7 @@ export const positions: Position[] = [
     title: "Senior Software Engineer",
     start: "2022-09",
     end: "2026-04",
+    technologies: ["C#", "TypeScript", ".NET", ".NET 6", ".NET 8", ".NET 10", "React.js", "Jest", "Cypress", "Playwright", "Entity Framework", "GraphQL", "SQL Server", "Azure Web Apps", "Azure CosmosDB", "Azure Service Bus", "Azure Key Vault", "Azure Redis", "Azure SQL Hyperscale", "Model Context Protocol", "Claude AI"],
     highlights: [
       {
         id: "red-rover-query-compile-diagnosis",
@@ -44,9 +46,14 @@ export const positions: Position[] = [
         result:
           "Eliminated the recurring weekly outages driving a systemic RESOURCE_SEMAPHORE_QUERY_COMPILE crisis, by establishing the root cause with query-level evidence.",
         keywords: [
-          "SQL Server",
+          "C#",
+          ".NET",
+          ".NET 8",
           "Entity Framework",
           "GraphQL",
+          "SQL Server",
+          "Azure",
+          "Azure SQL Hyperscale",
           "Performance diagnostics",
           "Query plan analysis",
           "Incident response",
@@ -137,6 +144,7 @@ export const positions: Position[] = [
     title: "Senior Software Engineer",
     start: "2020-03",
     end: "2021-10",
+    technologies: ["C#", ".NET", ".NET 5", "Akka.NET", "gRPC", "XML", "Vue.js", "Node.js", "Azure Web Apps", "Azure CosmosDB", "Azure Service Bus", "Azure SignalR (Backplane)", "Azure APIM", "Azure Key Vault", "Azure Config", "Azure Front Door", "Azure B2C", "Salesforce"],
     highlights: [
       {
         id: "qw-elm-architecture-correction",
@@ -146,7 +154,7 @@ export const positions: Position[] = [
           "Documented the technical incompatibility concretely and demonstrated why the approach couldn't work, moving the team to a viable design before it cost further schedule.",
         result:
           "Corrected the architecture early, keeping the greenfield product's delivery schedule intact.",
-        keywords: ["Architecture review", "gRPC", "Azure", ".NET", "Technical leadership"],
+        keywords: ["Architecture review", "C#", ".NET", "gRPC", "Akka.NET", "Azure", "Azure Web Apps", "Technical leadership"],
         narrative: {
           senior: {
             action:
@@ -167,7 +175,7 @@ export const positions: Position[] = [
           "Worked with the team's backend developer on the integration's actual goal, diagnosed the existing code as hand-built XML without formal contracts, and got a proper contract-based rebuild to a working model within three days by sharing established contract patterns from his own team.",
         result:
           "Unblocked the product's revenue-critical integration path, turning a three-month stall of zero successful end-to-end calls into a working model within days.",
-        keywords: ["C#", "API integration", "Systems architecture", "Cross-team collaboration"],
+        keywords: ["C#", "XML", "API integration", "Systems architecture", "Cross-team collaboration"],
         narrative: {
           principal: {
             context:
@@ -237,6 +245,7 @@ export const positions: Position[] = [
     title: "Senior Software Developer",
     start: "2021-10",
     end: "2022-07",
+    technologies: ["C#", "Java", "Vue.js", "SQL Server", "SSIS", "SharePoint"],
     resumeDetail: "brief",
     highlights: [
       {
@@ -247,7 +256,7 @@ export const positions: Position[] = [
           "Designed and delivered two mid-sized educational-technology projects (Summer Connections and Assistive Technology Part 1) full-stack from ideation through release, while mentoring junior and mid-level developers throughout, and extended several ~8-year-old legacy systems spanning Java, C#, SharePoint, and SSIS rather than treating them as replaceable.",
         result:
           "Delivered full-lifecycle ownership on two concrete projects despite significant post-reduction-in-force understaffing, demonstrating a repeatable pattern of rapid legacy-system triage and generalist delivery under pressure.",
-        keywords: ["Vue.js", "C#", "Java", "Microservices", "SQL Server", "Mentorship", "Systems architecture"],
+        keywords: ["C#", "Java", "Vue.js", "SQL Server", "SSIS", "SharePoint", "Microservices", "Mentorship", "Systems architecture"],
         tiers: [
           { tier: "principal", include: false },
           { tier: "staff", include: true, emphasis: "support" },
@@ -262,6 +271,7 @@ export const positions: Position[] = [
     title: "Senior Software Developer",
     start: "2018-09",
     end: "2020-02",
+    technologies: ["C#", "TypeScript", "Vue.js", ".NET", ".NET 3", "Azure Web Apps", "Azure SQL Hyperscale", "IdentityServer3", "Progressive Web App"],
     highlights: [
       {
         id: "bcit-ransomware-recovery",
@@ -284,7 +294,7 @@ export const positions: Position[] = [
           "Built an offline-first Progressive Web App using TypeScript and Vue.js, backed by Azure with IdentityServer3 for auth, designed around real-world connectivity constraints rather than treating offline mode as a nice-to-have.",
         result:
           "Delivered a reliable field-audit tool for a traveling workforce operating in areas without dependable internet access.",
-        keywords: ["TypeScript", "Vue.js", "Progressive Web App", "Azure", "Offline-first architecture"],
+        keywords: ["TypeScript", "Vue.js", "Progressive Web App", "Azure", "IdentityServer3", "Offline-first architecture"],
         tiers: [
           { tier: "principal", include: false },
           { tier: "staff", include: true, emphasis: "support" },
@@ -299,6 +309,7 @@ export const positions: Position[] = [
     title: "Associate Software Developer",
     start: "2017-03",
     end: "2018-09",
+    technologies: ["C#", "ASP.NET", "jQuery", "SQL Server", "PowerBuilder", "Windows Services"],
     resumeDetail: "brief",
     highlights: [
       {
@@ -309,7 +320,7 @@ export const positions: Position[] = [
           "Diagnosed the synchronous processing as the structural cause of the crashes, recommended a queue-based architecture, and built a Windows Service (DocumentQUploader) to implement it alongside finishing and managing the broader E-File system (jQuery, ASP.NET MVC, MSSQL).",
         result:
           "Resolved a recurring production-crash pattern by re-architecting the filing pipeline around a queue, while also becoming a de facto mentor to the wider team despite holding the most junior title on it.",
-        keywords: ["ASP.NET", "MSSQL", "Systems architecture", "Queue-based architecture", "Mentorship"],
+        keywords: ["C#", "ASP.NET", "jQuery", "SQL Server", "PowerBuilder", "Windows Services", "Systems architecture", "Queue-based architecture", "Mentorship"],
         tiers: [
           { tier: "principal", include: false },
           { tier: "staff", include: true, emphasis: "support" },
@@ -324,6 +335,7 @@ export const positions: Position[] = [
     title: "Lead Developer",
     start: "2016-02",
     end: "2017-03",
+    technologies: ["C#", ".NET", "ASP.NET", "Web API", "AngularJS", "SQL Server"],
     resumeDetail: "brief",
     highlights: [
       {
@@ -334,7 +346,7 @@ export const positions: Position[] = [
           "Led a full, properly-resourced rebuild of a from-scratch state reporting and compliance system (AngularJS, ASP.NET Web API, MSSQL), working directly with the district's Special Education manager to get accurate domain requirements firsthand.",
         result:
           "Correct reporting produced approximately $2M/year in recurring funding at a mature, steady state, growing from roughly $200K captured in the first year -- a byproduct of building the system right, not a revenue-hunting goal.",
-        keywords: ["AngularJS", "C#", ".NET", "SQL Server", "Systems architecture", "Compliance reporting"],
+        keywords: ["C#", ".NET", "ASP.NET", "Web API", "AngularJS", "SQL Server", "Systems architecture", "Compliance reporting"],
         narrative: {
           senior: {
             action:
@@ -395,6 +407,7 @@ export const positions: Position[] = [
     title: "Systems Analyst",
     start: "2012-11",
     end: "2016-02",
+    technologies: ["C#", "ASP.NET", "SQL Server"],
     resumeDetail: "brief",
     highlights: [
       {
@@ -472,6 +485,7 @@ export const positions: Position[] = [
     title: "Process Analyst",
     start: "2010-03",
     end: "2012-11",
+    technologies: ["ASP.NET", "SQL Server", "SSRS"],
     resumeDetail: "brief",
     highlights: [
       {
@@ -482,7 +496,7 @@ export const positions: Position[] = [
           "Mapped the team's actual workflow using Lean Six Sigma, then replaced the process with a single-entry ASP.NET/MSSQL system with automated SSRS reporting, eliminating the hand-off and re-entry chain entirely.",
         result:
           "Recovered approximately $190,000 in combined tuition and state/city revenue in year one by eliminating a compounding manual-entry and late-filing problem.",
-        keywords: ["ASP.NET", "SQL Server", "Lean Six Sigma", "Process improvement", "Compliance reporting"],
+        keywords: ["ASP.NET", "SQL Server", "SSRS", "Lean Six Sigma", "Process improvement", "Compliance reporting"],
         tiers: [
           { tier: "principal", include: false },
           { tier: "staff", include: true, emphasis: "support" },
@@ -534,6 +548,7 @@ export const positions: Position[] = [
     title: "Research Analyst",
     start: "2009-02",
     end: "2010-03",
+    technologies: ["SQL Server", "ASP.NET", "SSRS"],
     resumeDetail: "brief",
     highlights: [
       {
