@@ -1,5 +1,15 @@
 export type Tier = "principal" | "staff" | "senior";
 
+// Which set of stories a resume surfaces. "advanced-highlights" is the
+// tier-weighted default (Position highlights' `tiers`); "feature-ownership"
+// is a hand-picked list (curations.ts) of stories about owning a feature or
+// system end to end.
+export type Curation = "advanced-highlights" | "feature-ownership";
+
+// How a resume lays out the chosen stories: STAR paragraphs with keyword
+// chips, or a conventional heading-and-bullets resume.
+export type ResumeFormat = "event-focused" | "classic";
+
 export interface TierWeight {
   tier: Tier;
   include: boolean;
@@ -66,6 +76,12 @@ export interface Certification {
   name: string;
   year: string;
   note?: string;
+}
+
+export interface Education {
+  degree: string;
+  institution: string;
+  years: string;
 }
 
 export interface IndependentProject {

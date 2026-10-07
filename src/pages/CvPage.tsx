@@ -1,6 +1,6 @@
 import { Typography, Stack, Card, CardContent, Box, List, ListItem } from "@mui/material";
 import { positions } from "../data/resume/positions";
-import { summary, skillGroups, certifications, independentProjects } from "../data/resume/cv";
+import { summary, skillGroups, education, certifications, independentProjects } from "../data/resume/cv";
 import { KeywordChips } from "../components/KeywordChips";
 import { TechnologySummary } from "../components/TechnologySummary";
 import { PrintButton } from "../components/PrintButton";
@@ -80,6 +80,21 @@ export function CvPage() {
           </Stack>
         )}
       </Box>
+
+      {education.length > 0 && (
+        <Box component="section">
+          <Typography variant="h2" sx={{ fontSize: "var(--font-size-lg)", mb: 1 }}>
+            Education
+          </Typography>
+          <Stack spacing={0.5}>
+            {education.map(({ degree, institution, years }) => (
+              <Typography key={degree}>
+                {degree} &mdash; {institution} ({years})
+              </Typography>
+            ))}
+          </Stack>
+        </Box>
+      )}
 
       {certifications.length > 0 && (
         <Box component="section">

@@ -1,4 +1,4 @@
-import type { SkillGroup, Certification, IndependentProject } from "../../types/resume";
+import type { SkillGroup, Certification, Education, IndependentProject } from "../../types/resume";
 
 // CV-only content -- summary, skills inventory, certifications, and
 // independent projects. See src/types/resume.ts's "CV-only content" note
@@ -46,6 +46,14 @@ export const skillGroups: SkillGroup[] = [
       "Message brokering / pub-sub architecture",
       "Mentorship & technical hiring",
     ],
+  },
+];
+
+export const education: Education[] = [
+  {
+    degree: "A.S., Computer and Electronic Engineering Technology (CEET)",
+    institution: "ITT Technical Institute",
+    years: "2005 - 2007",
   },
 ];
 

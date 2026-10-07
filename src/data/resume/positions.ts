@@ -1,4 +1,13 @@
-import type { Position } from "../../types/resume";
+import type { Position, TierWeight } from "../../types/resume";
+
+// Stories written for the "Feature Ownership" curation only. That curation
+// ignores `tiers` (see curations.ts), so excluding every tier keeps these out
+// of the default tier-weighted resume.
+const featureOwnershipOnly: TierWeight[] = [
+  { tier: "principal", include: false },
+  { tier: "staff", include: false },
+  { tier: "senior", include: false },
+];
 
 // Real content is authored from private history/ material and pasted
 // in here -- history/ itself is never referenced from this repo.
@@ -10,7 +19,7 @@ export const positions: Position[] = [
     title: "Health Recovery Break & Independent Projects",
     start: "2026-04",
     end: "present",
-    technologies: ["SQL Server", "Model Context Protocol", "Claude AI"],
+    technologies: ["SQL Server", "Model Context Protocol", "Claude AI", "C#", ".NET 10", "TypeScript", "React.js", "OpenAPI", "Haskell"],
     highlights: [
       {
         id: "independent-mssql-tooling-generalization",
@@ -26,6 +35,50 @@ export const positions: Position[] = [
           { tier: "staff", include: true, emphasis: "support" },
           { tier: "senior", include: false },
         ],
+      },
+      {
+        id: "independent-contract-first-showcase",
+        context:
+          "Wanted a small, complete, inspectable example of how I work day to day, rather than a description of it.",
+        action:
+          "Built bread-and-butter, a full-stack slice (React, ASP.NET Core on .NET 10, SQLite) where an OpenAPI 3.1 contract is the single source of truth and both the server and the generated TypeScript client derive from it. Each step of contract, red test, green implementation, and refactor is its own commit, with design decisions written up in the repository. AI use: built with Claude Code as a collaborator; the repository's CLAUDE.md requires an audit entry for every turn in which Claude creates, modifies, or deletes files.",
+        result:
+          "A runnable repository with 24 commits, seven contract-bound integration tests, and a readable history of the method.",
+        keywords: ["OpenAPI", "Contract-first design", "ASP.NET Core", ".NET 10", "React.js", "TypeScript", "Test-driven development", "Claude AI", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "independent-dnd-mcp-server",
+        context:
+          "Wanted to see whether requirements for an AI-assisted tool could come from the AI's own reported failures rather than from guesses about what it would need.",
+        action:
+          "Built dnd-campaign-manager, a C# MCP server on .NET 8 and SQLite that lets Claude run Pathfinder 1e campaigns as game master while the server handles rules enforcement, character state, dice, and NPC tracking. Ran three full playtest sessions in different play styles, asked each Claude instance to report where it struggled, and prioritized features from those reports. AI use: a Claude-assisted project by its own description, and Claude is also the system's runtime user.",
+        result:
+          "A playable server with eight of ten planned slices complete and field-tested; loot generation and advanced NPC construction remain stubbed.",
+        keywords: ["Model Context Protocol", "MCP", "C#", ".NET 8", "SQLite", "Spec-first design", "Claude AI", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "independent-haskell-polyglot-challenge",
+        context:
+          "Set myself a polyglot challenge on a bounty board of practice tasks: deliver a working tool in Haskell, a language new to me, within three weeks.",
+        action:
+          "Built a Haskell command-line aggregator that reads CSV files, groups by chosen fields, and applies aggregation functions such as counts. AI use: relied heavily on Claude to learn Haskell syntax, and kept comments marking the AI-generated sections in the code.",
+        result:
+          "Delivered a working minimum viable tool inside the deadline. Some planned metadata features remain unimplemented, and I spent far more time on Windows tooling and type errors than on the core logic.",
+        keywords: ["Haskell", "Cabal", "Learning agility", "Claude AI"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "independent-ai-interviewer-in-progress",
+        context:
+          "After taking part in three AI-conducted interviews, I wanted to test whether a few UX changes could improve the experience.",
+        action:
+          "Started ai-interviewer, an in-progress project with a written spec and roadmap. AI use: Claude authors files it creates fresh, with me as co-author, working in a prototype zone with latitude and a production zone where no line is accepted until I have tested it; I write tests first, because a green suite Claude wrote for its own code is not independent evidence. Prompts are logged with redaction.",
+        result:
+          "Work in progress; no outcome is claimed yet. Published for the working agreement as much as the product.",
+        keywords: ["Claude AI", "TypeScript", "AI-assisted development", "Test-driven development", "Feature ownership"],
+        tiers: featureOwnershipOnly,
       },
     ],
   },
@@ -136,6 +189,50 @@ export const positions: Position[] = [
           { tier: "senior", include: true, emphasis: "lead" },
         ],
       },
+      {
+        id: "red-rover-time-tracking-v2-front-end",
+        context:
+          "Red Rover moved to a model where a single developer owned a feature end to end -- design, specification, implementation, testing, deployment, and the Azure resources it needed. I was hired specifically for Time Tracking v2, a new product.",
+        action:
+          "Rebuilt the entire front end from the product director's mockups, reconciling them with the CTO's architectural designs, and wired it to the GraphQL API. Owned the approval workflow and the timesheet, pay-period, and pay-schedule lifecycles as features, while a colleague ported the v1 backend components and I added backend-only pieces where the UI needed them.",
+        result:
+          "Delivered the v2 web experience as its sole front-end owner, with the product and architecture inputs of two stakeholders synthesized into one coherent UI.",
+        keywords: ["React.js", "TypeScript", "GraphQL", "Feature ownership", "Azure"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "red-rover-rule-explainability",
+        context:
+          "Time tracking allowed on the order of 10^27 rule configurations across the organization, pay-schedule, timesheet, and time-entry levels, down to breaks and shifts. Customers and customer success could not tell why an entry was off by a minute or five, or why a rule had not fired.",
+        action:
+          "Owned the feature end to end: synthesized answers from event logs, change logs, and some error logs, exposed them through the GraphQL API, and surfaced them in the front end tied to the specific time entry within its timesheet.",
+        result:
+          "Gave customers and customer success a way to see which rules applied to an entry and why, instead of reverse-engineering configuration by hand.",
+        keywords: ["GraphQL", "React.js", "Feature ownership", "Log analysis", "Observability"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "red-rover-absence-vacancy-v2-events",
+        context:
+          "The Absence & Vacancy product was still on v1 and had no integration with the new Time Tracking product, so absences could not flow into time.",
+        action:
+          "Determined what needed to be ported to v2, and put v1 and v2 behind feature flags so each customer's enabled products and versions routed to the correct handlers for the business logic.",
+        result:
+          "Let Absence & Vacancy emit events into Time Tracking v2 while customers on either version kept working.",
+        keywords: ["Feature flags", "Event-driven architecture", "C#", ".NET", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "red-rover-sftp-import-resilience",
+        context:
+          "File imports arrived through a third-party SFTP service (Couchdrop) that dropped files into Azure File Shares and triggered an import. Race conditions originating on the vendor's side were causing failed or unreliable imports.",
+        action:
+          "Took over the integration, worked out the full upload-to-import flow, diagnosed the race conditions, and hardened our side to tolerate vendor-side failures.",
+        result:
+          "Made file imports resilient to a third-party vendor's failures rather than dependent on its behavior.",
+        keywords: ["Azure", "Integration", "Resilience", "C#", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
     ],
   },
   {
@@ -237,6 +334,39 @@ export const positions: Position[] = [
           { tier: "senior", include: false },
         ],
       },
+      {
+        id: "qw-elm-front-end-ownership",
+        context:
+          "A three-person team owned a greenfield insurance quote and point-of-sale product end to end and was expected to be fungible -- any of us had to be able to cover another's workload. Teammates were stronger on the back end, so I took over the front end.",
+        action:
+          "Owned the front-end workflow design, the SignalR client, and the Salesforce chat and re-engagement email integrations for users who got a quote but did not convert. Chose Vue.js 2.5 over React and Angular, and kept it in JavaScript because the mostly back-end team did not yet know TypeScript. Layered front-end state in three tiers, so business logic prototyped in the UI could move to the back end as ownership of the quoting pipeline was settled.",
+        result:
+          "Delivered a modular front end that fit the team's actual skills, with end-to-end tests that held up through the business-logic migration to the back end.",
+        keywords: ["Vue.js", "JavaScript", "Vuex", "SignalR", "Salesforce", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "qw-cosmos-ephemeral-quotes",
+        context:
+          "Insurance quotes were valid only for the day they were generated, because carrier rates moved daily, and the questions asked changed monthly under CI/CD. The company's shared Azure SQL instance was already overloaded.",
+        action:
+          "Advocated, and the team agreed, to store quote forms in Cosmos DB: records could carry a time-to-live, optimistic concurrency was built in, and versioned documents let older forms stay compatible as the workflow changed. Where the business wanted real-time aggregates that Cosmos does not do well, negotiated a 15 to 30 minute SLA for sending forms to Snowflake for business intelligence.",
+        result:
+          "Avoided adding load to the shared SQL instance and avoided relational migrations for a monthly-changing workflow, while giving the business a defined reporting latency.",
+        keywords: ["Azure CosmosDB", "Snowflake", "Data modeling", "Architecture", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "qw-realtime-and-api-gateway",
+        context:
+          "The quote flow had to update the UI asynchronously and scale horizontally, and the product depended on third-party services (GIS, VIN lookup, quoting) that could change without notice.",
+        action:
+          "Recommended SignalR on the Azure SignalR backplane so multiple web API instances could host the hub without a Redis or SQL backplane, after a cost assessment showed the first 10,000 connections were free. Also recommended Azure Service Bus, which our architect researched and implemented around a single JSON contract. Proposed Azure API Management for routing, throttling, and mocking for tests, and helped DevOps set up Azure Front Door routing and firewall policies without conflicting throttling.",
+        result:
+          "Gave the product horizontally scalable real-time updates at low cost, and insulated it from third-party API changes with a gateway that also supported testing.",
+        keywords: ["Azure SignalR (Backplane)", "Azure Service Bus", "Azure APIM", "Azure Front Door", "Architecture", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
     ],
   },
   {
@@ -300,6 +430,39 @@ export const positions: Position[] = [
           { tier: "staff", include: true, emphasis: "support" },
           { tier: "senior", include: true, emphasis: "lead" },
         ],
+      },
+      {
+        id: "bcit-pangea-auto-ownership",
+        context:
+          "I was brought in to work across two products. Pangea Auto's original developer had left, and nobody else owned its codebase.",
+        action:
+          "Took over Pangea Auto entirely: negotiated scope with the product owner, worked with the UX/UI designer on what could be done and when, and implemented everything from the front end to the back end, including the Azure web servers and SQL servers, scaling, and configuration. Also took feature work on CompTracker, the company's main product, where a dedicated QA engineer tested against the product owner's acceptance criteria.",
+        result:
+          "Became the single owner of a product from design negotiation through infrastructure, while contributing to the company's primary revenue product.",
+        keywords: ["TypeScript", "Vue.js", "Azure", "SQL Server", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "bcit-offline-mode-recovery",
+        context:
+          "Pangea Auto's offline mode served users in Canada, where Wi-Fi and cellular coverage were unreliable. After a migration from Angular to Vue and from JavaScript to TypeScript, much of the service-worker, database-write, and strategy code was broken, so the app appeared to save and sync but often did not. Safari, which had weak PWA support, had never been tested.",
+        action:
+          "Spent the first quarter investigating the codebase and restoring it to its specified behavior. Maintained a strategy-pattern front end that switched to an offline mode on connectivity loss, saving to local storage, session storage, and the browser's local database; verified the connection before going back online; synced automatically or on request; and reconciled partial saves with optimistic concurrency (ETags), highlighting changed areas without discarding local data. Emulated Safari to test it.",
+        result:
+          "Restored dependable offline saving and synchronization across Chrome, Firefox, Safari, and Internet Explorer.",
+        keywords: ["Progressive Web App", "Offline-first architecture", "TypeScript", "Vue.js", "Optimistic concurrency", "Feature ownership"],
+        tiers: featureOwnershipOnly,
+      },
+      {
+        id: "bcit-live-reporting",
+        context:
+          "The company wanted live reporting without paying for reporting-tool licenses, to keep its unit economics lean.",
+        action:
+          "Built new report pages from scratch in Vue.js and took over several existing ones.",
+        result:
+          "Delivered live reporting without third-party licensing cost.",
+        keywords: ["Vue.js", "Reporting", "Feature ownership"],
+        tiers: featureOwnershipOnly,
       },
     ],
   },

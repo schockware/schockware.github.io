@@ -1,5 +1,6 @@
 import { skillSynonyms } from "../data/resume/skillSynonyms";
-import type { Position, StructuredHighlight, Tier, TierNarrative } from "../types/resume";
+import { featureOwnershipHighlightIds } from "../data/resume/curations";
+import type { Curation, Position, StructuredHighlight, Tier, TierNarrative } from "../types/resume";
 
 // Every lookup in canonicalizeSkill lowercases its input first, so the
 // canonical form must be registered under its lowercased spelling too --
@@ -81,48 +82,58 @@ export interface PositionTierMatch {
   }>;
 }
 
+function curatedEmphasis(
+  highlight: StructuredHighlight,
+  tier: Tier,
+  curation: Curation,
+): "lead" | "support" | null {
+  if (curation === "feature-ownership") {
+    return featureOwnershipHighlightIds.has(highlight.id) ? "lead" : null;
+  }
+  const weight = highlight.tiers.find((t) => t.tier === tier);
+  return weight?.include ? (weight.emphasis ?? "support") : null;
+}
+
 /**
- * Same filtering as filterTierHighlights, grouped back under one card per
- * Position (in positions.ts's chronological order) instead of one card per
- * highlight -- so title/employer/dates render once per role, not once per
- * highlight. Lead-before-support ordering is scoped within each position's
- * own highlights rather than flattened across the whole tier, so a
- * support-tier highlight at someone's current role doesn't get displaced
- * behind a lead-tier highlight from an older one.
+ * Groups a tier's highlights under one card per Position (in positions.ts's
+ * chronological order) instead of one card per highlight -- so
+ * title/employer/dates render once per role, not once per highlight.
+ * Lead-before-support ordering is scoped within each position's own
+ * highlights rather than flattened across the whole tier, so a support-tier
+ * highlight at someone's current role doesn't get displaced behind a
+ * lead-tier highlight from an older one.
  *
  * Positions marked `resumeDetail: "brief"` skip highlight filtering
  * entirely and always surface (unless a skill query is active, in which
  * case they're skipped -- a skill search should only surface positions
  * that actually demonstrate the queried skill, not every older role by
  * default) so the resume stays printable instead of showing full STAR
- * detail for a 15+ year career.
+ * detail for a 15+ year career. The "feature-ownership" curation promotes a
+ * brief position to full when it has a curated highlight, since those
+ * stories are the point of that view.
  */
 export function groupTierHighlightsByPosition(
   positions: Position[],
   tier: Tier,
   rawQuery: string,
+  curation: Curation = "advanced-highlights",
 ): PositionTierMatch[] {
   const canonicalTerms = parseSkillQuery(rawQuery);
   const groups: PositionTierMatch[] = [];
   for (const position of positions) {
-    const detail = position.resumeDetail ?? "full";
-    if (detail === "brief") {
-      const hasIncludedHighlight = position.highlights.some((h) => h.tiers.find((t) => t.tier === tier && t.include));
-      if (!hasIncludedHighlight) continue;
-      if (canonicalTerms.length > 0) continue;
-      groups.push({ position, detail: "brief", highlights: [] });
-      continue;
-    }
     const highlights: PositionTierMatch["highlights"] = [];
     for (const highlight of position.highlights) {
-      const weight = highlight.tiers.find((t) => t.tier === tier);
-      if (!weight?.include) continue;
+      const emphasis = curatedEmphasis(highlight, tier, curation);
+      if (!emphasis) continue;
       if (!highlightMatches(highlight, canonicalTerms)) continue;
-      highlights.push({
-        highlight,
-        emphasis: weight.emphasis ?? "support",
-        narrative: resolveNarrative(highlight, tier),
-      });
+      highlights.push({ highlight, emphasis, narrative: resolveNarrative(highlight, tier) });
+    }
+    const isBrief = (position.resumeDetail ?? "full") === "brief";
+    if (isBrief && (curation === "advanced-highlights" || highlights.length === 0)) {
+      const hasIncludedHighlight = position.highlights.some((h) => h.tiers.find((t) => t.tier === tier && t.include));
+      if (!hasIncludedHighlight || canonicalTerms.length > 0) continue;
+      groups.push({ position, detail: "brief", highlights: [] });
+      continue;
     }
     if (highlights.length === 0) continue;
     highlights.sort((a, b) => (a.emphasis === b.emphasis ? 0 : a.emphasis === "lead" ? -1 : 1));

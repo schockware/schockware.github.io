@@ -5,9 +5,9 @@ import { contact } from "../data/resume/contact";
 // resume/CV page, so a "Save as PDF" export carries contact details on its
 // own. Link text is the URL itself (not a label) because printed pages
 // can't be clicked.
-export function ContactHeader() {
+export function ContactHeader({ centered = false }: { centered?: boolean }) {
   return (
-    <Stack spacing={0.5}>
+    <Stack spacing={0.5} sx={centered ? { textAlign: "center" } : undefined}>
       <Typography variant="h1" sx={{ fontSize: "var(--font-size-2xl)" }}>
         {contact.name}
       </Typography>
